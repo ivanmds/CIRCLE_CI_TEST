@@ -6,7 +6,8 @@ jobs:
     docker:
       - image: node
     steps:
-      - run: npm install @nestjs/cli
+      - run: cd ..
+      - run: npm i -g @nestjs/cli
       - run: pwd
       - run: ls
       - run: cat package.json 
