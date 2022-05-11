@@ -8,7 +8,7 @@ jobs:
     steps:
       - run: npm install @nestjs/cli
       - run: pwd
-      - run: echo "this is the build job"
+      - run: ls
       - run: npm run build
   test:
     docker:
