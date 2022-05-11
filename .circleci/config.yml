@@ -9,7 +9,7 @@ jobs:
       - run: npm install @nestjs/cli
       - run: pwd
       - run: echo "this is the build job"
-      - run: npm build
+      - run: npm run build
   test:
     docker:
       - image: node
