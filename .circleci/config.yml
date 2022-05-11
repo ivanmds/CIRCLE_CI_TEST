@@ -6,7 +6,7 @@ jobs:
     docker:
       - image: node
     steps:
-      - run: npm -i @nestjs/cli
+      - run: npm install nestjs/cli
       - run: pwd
       - run: echo "this is the build job"
   test:
