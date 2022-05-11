@@ -6,10 +6,10 @@ jobs:
     docker:
       - image: node
     steps:
-      - run: npm --version
       - run: npm install @nestjs/cli
       - run: pwd
       - run: echo "this is the build job"
+      - run: npm build
   test:
     docker:
       - image: node
