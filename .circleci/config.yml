@@ -6,6 +6,7 @@ jobs:
     docker:
       - image: node
     steps:
+      - checkout
       - run: cd ..
       - run: npm i -g @nestjs/cli
       - run: pwd
