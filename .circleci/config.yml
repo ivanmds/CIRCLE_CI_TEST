@@ -8,10 +8,8 @@ jobs:
     steps:
       - checkout
       - run: npm i -g @nestjs/cli
-      - run: pwd
-      - run: ls
-      - run: cat package.json 
-      - run: npm run build
+      - run: npm install 
+      - run: npm nest build
   test:
     docker:
       - image: node
