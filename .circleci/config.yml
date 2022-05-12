@@ -33,4 +33,4 @@ workflows:
           context:
             - global
           requires:
-            - build
+            - hold_approval
