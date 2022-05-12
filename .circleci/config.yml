@@ -47,7 +47,7 @@ workflows:
           post-steps:
             - jira/notify:
                 job_type: deployment
-                environment_type: 'stagging'
+                environment_type: <<parameters.environment-type>>
       - hold_approval:
           type: approval
           requires:
