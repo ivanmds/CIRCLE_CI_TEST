@@ -13,7 +13,7 @@ jobs:
       - save_cache:
           key: app_nest-30
           paths:
-            - ~/
+            - ~/dist
   deploy:
     docker:
       - image: node
