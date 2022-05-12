@@ -6,20 +6,37 @@ jobs:
       - image: node
     steps:
       - checkout
-      - run: npm i -g @nestjs/cli
+      - run: 
+          name: 'Install NestJs'
+          command: npm i -g @nestjs/cli
+
       - run: npm install 
-      - run: npm run build --omit=dev
-      - run: npm run test
+
+      - run: 
+          name: 'Build application'
+          command: npm run build --omit=dev
+
+      - run:
+          name: 'Test application'
+          command: npm run test
   deploy:
     docker:
       - image: docker
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker --help
-      - run: docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PWD
-      - run: docker build -t ivanmds/test_ci_cd:1.0.2 .
-      - run: docker push ivanmds/test_ci_cd:1.0.2
+
+      - run: 
+          name: 'Docker hub login'
+          command: docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PWD
+
+      - run:
+          name: 'Build image'
+          command: docker build -t ivanmds/test_ci_cd:1.0.2 .
+
+      - run: 
+          name: 'Push image'
+          command: docker push ivanmds/test_ci_cd:1.0.2
 
 workflows:
   build_and_test:
