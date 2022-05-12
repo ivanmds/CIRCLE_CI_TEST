@@ -11,18 +11,25 @@ jobs:
       - run: npm install 
       - run: npm run build --prod
       - run: npm run test
-  test:
+      - save_cache:
+          key: app_nest
+          paths:
+            - ~/app
+  deploy:
     docker:
       - image: node
     steps:
-      - checkout
-      - run: echo "this is the test job"
+      - restore_cache:
+          keys:
+            - app_nest
+
+      - run: ls
 
 # Orchestrate our job run sequence
 workflows:
   build_and_test:
     jobs:
       - build
-      - test:
+      - deploy:
           requires:
             - build
