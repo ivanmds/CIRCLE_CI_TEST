@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  jira: circleci/jira@1.0.5
 
 jobs:
   build:
@@ -41,7 +43,9 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - build
+      - build:
+          post-steps:
+            - jira/notify
       - hold_approval:
           type: approval
           requires:
