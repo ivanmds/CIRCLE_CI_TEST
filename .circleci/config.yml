@@ -15,12 +15,11 @@ jobs:
       - image: docker
     steps:
       - checkout
-      - run: docker --version
       - setup_remote_docker
       - run: docker --help
-      #- run: docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PWD
-      #- run: docker build -t ivanmds/test_ci_cd:1.0.2 .
-      #- run: docker push ivanmds/test_ci_cd:1.0.2
+      - run: docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PWD
+      - run: docker build -t ivanmds/test_ci_cd:1.0.2 .
+      - run: docker push ivanmds/test_ci_cd:1.0.2
 
 workflows:
   build_and_test:
