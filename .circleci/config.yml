@@ -8,18 +8,22 @@ jobs:
       - checkout
       - run: npm i -g @nestjs/cli
       - run: npm install 
-      - run: npm run build --prod
+      - run: npm run build --omit=dev
       - run: npm run test
   deploy:
     docker:
       - image: docker
     steps:
-      - run: docker --version
+      - run: docker login -u $DOCKER_HUB_USER -p $DOCKER__HUB_PWD
+      - run: docker build -t ivanmds/test_ci_cd:1.0.1.{{ CIRCLE_BUILD_NUM }}-rc
+      - run: docker push ivanmds/test_ci_cd:1.0.1.{{ CIRCLE_BUILD_NUM }}-rc
 
 workflows:
   build_and_test:
     jobs:
       - build
       - deploy:
+          context:
+            - global
           requires:
             - build
