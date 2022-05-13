@@ -52,9 +52,6 @@ workflows:
           requires:
             - build
       - deploy:
-          post-steps:
-            - jira/notify:
-                job_type: deployment
           context:
             - global
           requires:
