@@ -70,7 +70,7 @@ workflows:
       - build_test:
           post-steps:
             - jira/notify:
-                service_id: b:YXJpOmNsb3VkOmdyYXBoOjpzZXJ2aWNlL2NhZGE5Yzk0LTBlNjAtMTFlYi1hOTM1LTBhNzdmM2Y0NTMwNC85ZTRiMmMxZS01NDdhLTExZWMtOTkyNS0wYWJlM2Y0YTY2MDE=
+                service_id: b:YXJpOmNsb3VkOmdyYXBoOjpzZXJ2aWNlL2I2MmE3MDI0LTZhODktNDg3NC05NmRmLTkyNGZlMDQxOTNiNS9lOTNhMGE5ZS1kNTU2LTExZWMtOGRlYy0wYWJlM2Y0YTY2MDE=
       - external_approval:
           requires:
             - "build_test"
