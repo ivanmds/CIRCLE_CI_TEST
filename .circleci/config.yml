@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  jira: circleci/jira@1.0.5 
 
 jobs:
   build_test:
@@ -65,8 +67,13 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      #- build_test
-      - external_approval
+      - build_test:
+          post-steps:
+            - jira/notify:
+                service_id: b:YXJpOmNsb3VkOmdyYXBoOjpzZXJ2aWNlL2NhZGE5Yzk0LTBlNjAtMTFlYi1hOTM1LTBhNzdmM2Y0NTMwNC85ZTRiMmMxZS01NDdhLTExZWMtOTkyNS0wYWJlM2Y0YTY2MDE=
+      - external_approval:
+          requires:
+            - "build_test"
       - hold_approval:
           type: approval
           requires:
