@@ -1,10 +1,5 @@
 version: 2.1
 
-parameters:
-  wait_external_approval:
-    type: boolean
-    default: true
-
 jobs:
   build_test:
     docker:
@@ -26,6 +21,10 @@ jobs:
           command: npm run test
 
   external_approval:
+    parameters:
+      wait_external_approval:
+        type: boolean
+        default: true
     docker:
       - image: node
     steps:
