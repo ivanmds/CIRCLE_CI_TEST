@@ -35,8 +35,8 @@ jobs:
             while  [ <<parameters.wait_external_approval>> ]; 
             do 
               echo "Welcome $(( x++ )) times"; 
-              sleep 15;
-              if x -gt 5;
+              sleep 10;
+              if x -gt 5
               then 
                 break;
               fi; 
