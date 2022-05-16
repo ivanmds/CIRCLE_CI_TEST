@@ -67,10 +67,13 @@ workflows:
   build_and_test:
     jobs:
       - build_test
+      - external_approval:
+          requires:
+            - build_test
       - hold_approval:
           type: approval
           requires:
-            - build
+            - external_approval
       - deploy:
           context:
             - global
