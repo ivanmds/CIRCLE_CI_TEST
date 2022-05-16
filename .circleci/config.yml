@@ -16,15 +16,30 @@ workflows:
       - external_approval:
           requires:
             - "build_test"
+          post-steps:
+            - jira/notify:
+                environment_type: development
+                job_type: deployment
+                service_id: 'b:YXJpOmNsb3VkOmdyYXBoOjpzZXJ2aWNlL2I2MmE3MDI0LTZhODktNDg3NC05NmRmLTkyNGZlMDQxOTNiNS9lOTNhMGE5ZS1kNTU2LTExZWMtOGRlYy0wYWJlM2Y0YTY2MDE='
       - hold_approval:
           type: approval
           requires:
             - external_approval
+          post-steps:
+            - jira/notify:
+                environment_type: development
+                job_type: deployment
+                service_id: 'b:YXJpOmNsb3VkOmdyYXBoOjpzZXJ2aWNlL2I2MmE3MDI0LTZhODktNDg3NC05NmRmLTkyNGZlMDQxOTNiNS9lOTNhMGE5ZS1kNTU2LTExZWMtOGRlYy0wYWJlM2Y0YTY2MDE='
       - deploy:
           context:
             - global
           requires:
             - hold_approval
+          post-steps:
+            - jira/notify:
+                environment_type: development
+                job_type: deployment
+                service_id: 'b:YXJpOmNsb3VkOmdyYXBoOjpzZXJ2aWNlL2I2MmE3MDI0LTZhODktNDg3NC05NmRmLTkyNGZlMDQxOTNiNS9lOTNhMGE5ZS1kNTU2LTExZWMtOGRlYy0wYWJlM2Y0YTY2MDE='
 
 jobs:
   build_test:
