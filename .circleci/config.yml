@@ -39,7 +39,7 @@ jobs:
               if x -gt 5
               then 
                 break;
-              fi; 
+              fi 
             done'
       
   deploy:
