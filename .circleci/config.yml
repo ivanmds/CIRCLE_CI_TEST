@@ -31,7 +31,7 @@ jobs:
     steps:
       - run: 
           name: 'Waiting external approval'
-          command: 'x=1; while  [ $x -le 5 ]; do echo "Welcome $x times" $(( x++ )); done'
+          command: 'x=1; while  [ <<parameters.wait_external_approval>> ]; do echo "Welcome $x times" $(( x++ )); sleep 1m; if x -gt 5 then break fi;  done'
       
   deploy:
     docker:
