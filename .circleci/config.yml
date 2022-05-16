@@ -1,9 +1,12 @@
 version: 2.1
-orbs:
-  jira: circleci/jira@1.0.5
+
+parameters:
+  wait_external_approval:
+    type: boolean
+    default: true
 
 jobs:
-  build:
+  build_test:
     docker:
       - image: node
     steps:
@@ -21,6 +24,25 @@ jobs:
       - run:
           name: 'Test application'
           command: npm run test
+
+  external_approval:
+    docker:
+      - image: node
+    steps:
+      - run: 
+          name: 'Waiting external approval'
+          command: 
+            '
+            x=1
+            while [ $x -le 5 ]
+            do
+              echo "Welcome $x times"
+              x=$(( $x + 1 ))
+            done
+            
+            '
+      
+
   deploy:
     docker:
       - image: docker
@@ -40,13 +62,11 @@ jobs:
           name: 'Push image'
           command: docker push ivanmds/test_ci_cd:1.0.2
 
+
 workflows:
   build_and_test:
     jobs:
-      - build:
-          post-steps:
-            - jira/notify:
-                job_type: deployment
+      - build_test
       - hold_approval:
           type: approval
           requires:
