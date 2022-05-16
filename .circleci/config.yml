@@ -36,7 +36,7 @@ jobs:
             do 
               echo "Welcome $(( x++ )) times"; 
               sleep 10;
-              if x -gt 5
+              if x -gt 5;
               then 
                 break;
               fi 
@@ -65,10 +65,8 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - build_test
-      - external_approval:
-          requires:
-            - build_test
+      #- build_test
+      - external_approval
       - hold_approval:
           type: approval
           requires:
