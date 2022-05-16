@@ -34,10 +34,10 @@ jobs:
           command: 
             '
             x=1
-            while [ $x -le 5 ]
+            while [ $x -le 5 ];
             do
-              echo "Welcome $x times"
-              x=$(( $x + 1 ))
+              echo "Welcome $x times";
+              x=$(( $x + 1 ));
             done
             
             '
