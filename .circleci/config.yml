@@ -64,8 +64,9 @@ jobs:
               sleep 10;
               if $x -gt 5;
               then 
-                break
-              fi 
+                echo "Teste ";
+                break;
+              fi; 
             done'
       
   deploy:
