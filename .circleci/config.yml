@@ -1,6 +1,30 @@
 version: 2.1
+
 orbs:
-  jira: circleci/jira@1.0.5 
+  jira: circleci/jira@1.0.5
+
+workflows:
+  build_and_test:
+    jobs:
+      - build_test:
+          post-steps:
+            - jira/notify:
+                environment_type: development
+                job_type: deployment
+                service_id: b:YXJpOmNsb3VkOmdyYXBoOjpzZXJ2aWNlL2I2MmE3MDI0LTZhODktNDg3NC05NmRmLTkyNGZlMDQxOTNiNS9lOTNhMGE5ZS1kNTU2LTExZWMtOGRlYy0wYWJlM2Y0YTY2MDE=
+
+      - external_approval:
+          requires:
+            - "build_test"
+      - hold_approval:
+          type: approval
+          requires:
+            - external_approval
+      - deploy:
+          context:
+            - global
+          requires:
+            - hold_approval
 
 jobs:
   build_test:
@@ -62,24 +86,3 @@ jobs:
       - run: 
           name: 'Push image'
           command: docker push ivanmds/test_ci_cd:1.0.2
-
-
-workflows:
-  build_and_test:
-    jobs:
-      - build_test:
-          post-steps:
-            - jira/notify:
-                service_id: b:YXJpOmNsb3VkOmdyYXBoOjpzZXJ2aWNlL2I2MmE3MDI0LTZhODktNDg3NC05NmRmLTkyNGZlMDQxOTNiNS9lOTNhMGE5ZS1kNTU2LTExZWMtOGRlYy0wYWJlM2Y0YTY2MDE=
-      - external_approval:
-          requires:
-            - "build_test"
-      - hold_approval:
-          type: approval
-          requires:
-            - external_approval
-      - deploy:
-          context:
-            - global
-          requires:
-            - hold_approval
