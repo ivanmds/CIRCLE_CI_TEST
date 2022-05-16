@@ -33,7 +33,13 @@ jobs:
           command: 
             'x=1; 
             while  [ <<parameters.wait_external_approval>> ]; 
-            do echo "Welcome $(( x++ )) times" sleep 15 if x -gt 5 then break fi; 
+            do 
+              echo "Welcome $(( x++ )) times"; 
+              sleep 15;
+              if x -gt 5;
+              then 
+                break;
+              fi; 
             done'
       
   deploy:
