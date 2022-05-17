@@ -15,7 +15,7 @@ workflows:
       - hold_approval:
           type: approval
           requires:
-            - external_approval
+            - build_test
           post-steps:
             - jira/notify:
                 environment_type: development
