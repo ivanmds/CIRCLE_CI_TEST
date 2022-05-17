@@ -12,15 +12,6 @@ workflows:
                 environment_type: development
                 job_type: deployment
                 service_id: 'b:YXJpOmNsb3VkOmdyYXBoOjpzZXJ2aWNlL2I2MmE3MDI0LTZhODktNDg3NC05NmRmLTkyNGZlMDQxOTNiNS9lOTNhMGE5ZS1kNTU2LTExZWMtOGRlYy0wYWJlM2Y0YTY2MDE='
-
-      - external_approval:
-          requires:
-            - "build_test"
-          post-steps:
-            - jira/notify:
-                environment_type: development
-                job_type: deployment
-                service_id: 'b:YXJpOmNsb3VkOmdyYXBoOjpzZXJ2aWNlL2I2MmE3MDI0LTZhODktNDg3NC05NmRmLTkyNGZlMDQxOTNiNS9lOTNhMGE5ZS1kNTU2LTExZWMtOGRlYy0wYWJlM2Y0YTY2MDE='
       - hold_approval:
           type: approval
           requires:
@@ -61,29 +52,6 @@ jobs:
           name: 'Test application'
           command: npm run test
 
-  external_approval:
-    parameters:
-      wait_external_approval:
-        type: boolean
-        default: true
-    docker:
-      - image: node
-    steps:
-      - run: 
-          name: 'Waiting external approval' 
-          command:
-            'x=1; 
-            while  [ <<parameters.wait_external_approval>> ]; 
-            do 
-              echo "Welcome $(( x++ )) times"; 
-              sleep 10;
-              if $x -gt 5;
-              then 
-                echo "Teste ";
-                break;
-              fi; 
-            done'
-      
   deploy:
     docker:
       - image: docker
