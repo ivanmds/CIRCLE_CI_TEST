@@ -60,12 +60,8 @@ jobs:
       - setup_remote_docker
 
       - run:
-          name: 'System version'
-          command: 'uname -v'
-
-      - run:
           name: 'Install curl'
-          command: 'apt-get install curl'
+          command: 'sudo apt install curl'
 
       - run: 
           name: 'Docker hub login'
