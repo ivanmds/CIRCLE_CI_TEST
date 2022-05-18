@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   jira: circleci/jira@1.3.1
+  xmatters-orb: xmatters/xmatters-orb@1.0.4
 
 workflows:
   build_and_test:
