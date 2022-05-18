@@ -59,8 +59,6 @@ jobs:
           name: 'Test application'
           command: npm run test
 
-      - jira/notify
-
   deploy:
     docker:
       - image: docker
@@ -79,6 +77,8 @@ jobs:
       - run: 
           name: 'Push image'
           command: docker push ivanmds/test_ci_cd:1.0.3
+      
+      - jira/notify
     
   notify_jira:
     docker:
