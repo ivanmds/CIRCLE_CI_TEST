@@ -77,3 +77,10 @@ jobs:
       - run: 
           name: 'Push image'
           command: docker push ivanmds/test_ci_cd:1.0.3
+    
+  notify_jira:
+    docker:
+      - image: node
+    steps:
+      - run: 'echo fine'
+          
