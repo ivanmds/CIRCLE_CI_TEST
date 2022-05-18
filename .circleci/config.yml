@@ -72,13 +72,11 @@ jobs:
 
       - run:
           name: 'Build image'
-          command: docker build -t ivanmds/test_ci_cd:1.0.3 .
+          command: docker build -t ivanmds/test_ci_cd:1.0.4 .
 
       - run: 
           name: 'Push image'
-          command: docker push ivanmds/test_ci_cd:1.0.3
-      
-      - jira/notify
+          command: docker push ivanmds/test_ci_cd:1.0.4
     
   notify_jira:
     docker:
