@@ -30,7 +30,7 @@ workflows:
           requires:
             - hold_approval
       
-      - notify:
+      - notify_jira:
           requires:
             - deploy
           post-steps:
