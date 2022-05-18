@@ -59,6 +59,10 @@ jobs:
       - checkout
       - setup_remote_docker
 
+      - run:
+          name: 'Install curl'
+          command: 'apt-get install curl'
+
       - run: 
           name: 'Docker hub login'
           command: docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PWD
